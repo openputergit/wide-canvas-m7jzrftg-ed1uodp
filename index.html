@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blinkit Clone</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f8f9fa;
+        }
+        .status-bar {
+            background: #00b67a;
+            height: 24px;
+        }
+        .category-pill {
+            border: 1px solid #e2e8f0;
+            padding: 6px 16px;
+            border-radius: 20px;
+            white-space: nowrap;
+        }
+        .category-pill.active {
+            background: #00b67a;
+            color: white;
+            border-color: #00b67a;
+        }
+        .product-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body class="max-w-md mx-auto">
+    <!-- Status Bar -->
+    <div class="status-bar"></div>
+
+    <!-- Location Header -->
+    <div class="px-4 py-3 bg-white border-b">
+        <div class="flex items-center justify-between">
+            <div>
+                <div class="flex items-center gap-1">
+                    <span class="font-medium">Home</span>
+                    <i class="bi bi-chevron-down text-sm"></i>
+                </div>
+                <div class="text-sm text-gray-500">10-15 mins</div>
+            </div>
+            <div class="flex gap-3">
+                <i class="bi bi-person text-xl"></i>
+                <i class="bi bi-cart text-xl"></i>
+            </div>
+        </div>
+    </div>
+
+    <!-- Search Bar -->
+    <div class="p-4 bg-white">
+        <div class="flex items-center gap-2 bg-gray-100 p-3 rounded-lg">
+            <i class="bi bi-search text-gray-500"></i>
+            <input type="text" placeholder="Search products" class="bg-transparent w-full outline-none">
+        </div>
+    </div>
+
+    <!-- Categories -->
+    <div class="px-4 py-3 bg-white">
+        <div class="flex gap-3 overflow-x-auto no-scrollbar">
+            <span class="category-pill active">All</span>
+            <span class="category-pill">Electronics</span>
+            <span class="category-pill">Beauty</span>
+            <span class="category-pill">Kids</span>
+            <span class="category-pill">Gifting</span>
+        </div>
+    </div>
+
+    <!-- Products Grid -->
+    <div class="grid grid-cols-2 gap-4 p-4">
+        <!-- Product Card 1 -->
+        <div class="product-card">
+            <img src="https://source.unsplash.com/random/200x200/?electronics" alt="Product" class="w-full h-32 object-cover">
+            <div class="p-3">
+                <div class="text-sm font-medium">Wireless Earbuds</div>
+                <div class="text-xs text-gray-500 mt-1">1 piece</div>
+                <div class="flex items-center justify-between mt-2">
+                    <div class="font-medium">₹999</div>
+                    <button class="bg-white border border-green-500 text-green-500 px-4 py-1 rounded text-sm">ADD</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Product Card 2 -->
+        <div class="product-card">
+            <img src="https://source.unsplash.com/random/200x200/?beauty" alt="Product" class="w-full h-32 object-cover">
+            <div class="p-3">
+                <div class="text-sm font-medium">Face Cream</div>
+                <div class="text-xs text-gray-500 mt-1">50g</div>
+                <div class="flex items-center justify-between mt-2">
+                    <div class="font-medium">₹449</div>
+                    <button class="bg-white border border-green-500 text-green-500 px-4 py-1 rounded text-sm">ADD</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Product Card 3 -->
+        <div class="product-card">
+            <img src="https://source.unsplash.com/random/200x200/?toys" alt="Product" class="w-full h-32 object-cover">
+            <div class="p-3">
+                <div class="text-sm font-medium">Building Blocks</div>
+                <div class="text-xs text-gray-500 mt-1">100 pieces</div>
+                <div class="flex items-center justify-between mt-2">
+                    <div class="font-medium">₹799</div>
+                    <button class="bg-white border border-green-500 text-green-500 px-4 py-1 rounded text-sm">ADD</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Product Card 4 -->
+        <div class="product-card">
+            <img src="https://source.unsplash.com/random/200x200/?gift" alt="Product" class="w-full h-32 object-cover">
+            <div class="p-3">
+                <div class="text-sm font-medium">Gift Box</div>
+                <div class="text-xs text-gray-500 mt-1">1 set</div>
+                <div class="flex items-center justify-between mt-2">
+                    <div class="font-medium">₹1299</div>
+                    <button class="bg-white border border-green-500 text-green-500 px-4 py-1 rounded text-sm">ADD</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Add to cart functionality
+        const addButtons = document.querySelectorAll('button');
+        addButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                if (this.textContent === 'ADD') {
+                    this.textContent = '1';
+                    this.className = 'bg-green-500 text-white px-4 py-1 rounded text-sm';
+                } else {
+                    const count = parseInt(this.textContent);
+                    this.textContent = count + 1;
+                }
+            });
+        });
+
+        // Category selection
+        const categories = document.querySelectorAll('.category-pill');
+        categories.forEach(category => {
+            category.addEventListener('click', function() {
+                categories.forEach(c => c.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+<script>document.body.addEventListener('wheel', e => { if (!e.ctrlKey) return; e.preventDefault(); return }, { passive: false })</script>
+	</body>
+</html>
